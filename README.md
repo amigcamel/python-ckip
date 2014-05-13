@@ -1,4 +1,5 @@
-<h1>A Python API for CKIP Chinese Parser</h1>
+<h1>PyCCP (CKIP Chinese Parser)</h1>
+<p>A Python API for CKIP Chinese Parser</p>
 
 <p>CKIP Chinese Parser: http://parser.iis.sinica.edu.tw/</p>
 
