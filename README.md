@@ -5,5 +5,5 @@
 
 
 <h2>Usage</h2>
-from PyCPP import parseTree<br>
+from PyCCP import parseTree<br>
 res = parseTree('蟹老闆好帥氣。')
