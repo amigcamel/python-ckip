@@ -1,5 +1,6 @@
 # python-ckip 
 
+(支援Python2 / Python3)  
 想要使用CKIP Chinese Parser 進行小規模的斷詞測試  
 毋需登入即可使用  
   
