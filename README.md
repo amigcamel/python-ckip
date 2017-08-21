@@ -1,9 +1,18 @@
-<h1>PyCCP (CKIP Chinese Parser)</h1>
-<p>A Python API for CKIP Chinese Parser</p>
+# python-ckip 
 
-<p>CKIP Chinese Parser: http://parser.iis.sinica.edu.tw/</p>
+想要使用CKIP Chinese Parser 進行小規模的斷詞測試  
+毋需登入即可使用  
+  
+基本上它就是幫你方送HTTP request  
+然後把結果撈出來  
 
 
-<h2>Usage</h2>
-from PyCCP import parseTree<br>
-res = parseTree('蟹老闆好帥氣。')
+## 安裝
+
+    pip install ckippy
+
+## 使用
+
+    from ckippy import parse_tree
+
+    parse_tree('中研院斷詞器真是好棒棒')
