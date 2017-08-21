@@ -1,38 +1,44 @@
-#-*-coding:utf-8-*-
-import urllib, urllib2, cookielib, re
+# -*-coding:utf-8-*-
+"""__init__ module."""
+import urllib
+import urllib2
+import cookielib
+import re
 
-def parseTree(string):
-	if not isinstance(string, unicode):
-		try:
-			string = string.decode('utf-8')
-		except:
-			raise UnicodeError('Input encoding should be UTF8 of UNICODE')
-	string = string.encode('cp950')
 
-	URL = 'http://parser.iis.sinica.edu.tw/'
+def parse_tree(string):
+    """Send HTTP request and parse result."""
+    if not isinstance(string, unicode):
+        try:
+            string = string.decode('utf-8')
+        except Exception:
+            raise UnicodeError('Input encoding should be UTF8 of UNICODE')
+    string = string.encode('cp950')
 
-	cj = cookielib.CookieJar()
-	opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+    url = 'http://parser.iis.sinica.edu.tw/'
 
-	opener.addheaders = [
-	('User-Agent', 'Mozilla/5.0 Gecko/20100101 Firefox/29.0'),
-	('referer', 'http://parser.iis.sinica.edu.tw/'),
-	('Host', 'parser.iis.sinica.edu.tw')
-	]
+    cj = cookielib.CookieJar()
+    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 
-	raw = urllib.urlopen(URL).read()
-	fid = re.search('name="id" value="(\d+)"', raw).group(1)
+    opener.addheaders = [
+        ('User-Agent', 'Mozilla/5.0 Gecko/20100101 Firefox/29.0'),
+        ('referer', 'http://parser.iis.sinica.edu.tw/'),
+        ('Host', 'parser.iis.sinica.edu.tw')
+    ]
 
-	postdata = dict()
-	postdata['myTag'] = string
-	postdata['id'] = fid
+    raw = urllib.urlopen(url).read()
+    fid = re.search('name="id" value="(\d+)"', raw).group(1)
 
-	postdata = urllib.urlencode(postdata)
+    postdata = dict()
+    postdata['myTag'] = string
+    postdata['id'] = fid
 
-	resURL = 'http://parser.iis.sinica.edu.tw/svr/webparser.asp'
+    postdata = urllib.urlencode(postdata)
 
-	res = opener.open(resURL, postdata).read()
-	res = res.decode('cp950')
-	res = re.findall('<nobr>#\d+:(.*?)</nobr>', res)
+    res_url = 'http://parser.iis.sinica.edu.tw/svr/webparser.asp'
 
-	return res
+    res = opener.open(res_url, postdata).read()
+    res = res.decode('cp950')
+    res = re.findall('<nobr>#\d+:(.*?)</nobr>', res)
+
+    return res
